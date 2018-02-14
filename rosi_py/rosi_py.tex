@@ -1,0 +1,1327 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Assessing the Safety of Rosiglitazone\\
+    for the Treatment of Type 2 Diabetes}
+    \author{Konstantinos Vamvourellis}
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{python-3-environment}{%
+\section{Python 3 Environment}\label{python-3-environment}}
+
+    You can find instructions for installing PyStan over
+\href{http://pystan.readthedocs.io/en/latest/installation_beginner.html}{here}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{pystan}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{pystan}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}version\PYZus{}\PYZus{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+2.17.1.0
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{pickle}
+        
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+        
+        \PY{k+kn}{from} \PY{n+nn}{numpy}\PY{n+nn}{.}\PY{n+nn}{linalg} \PY{k}{import} \PY{n}{inv}\PY{p}{,} \PY{n}{cholesky}
+        \PY{k+kn}{from} \PY{n+nn}{numpy}\PY{n+nn}{.}\PY{n+nn}{random} \PY{k}{import} \PY{n}{uniform}
+        \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{special} \PY{k}{import} \PY{n}{expit}
+        \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{multivariate\PYZus{}normal}\PY{p}{,} \PY{n}{bernoulli}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} Plot Styling}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{p}{)}
+        \PY{n}{sns}\PY{o}{.}\PY{n}{set\PYZus{}style}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{darkgrid}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salmon}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{alpha} \PY{o}{=} \PY{o}{.}\PY{l+m+mi}{7}
+        \PY{n}{bins} \PY{o}{=} \PY{l+m+mi}{100}
+        \PY{n}{lw} \PY{o}{=} \PY{l+m+mi}{2}
+        \PY{n}{linestyle} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{linecolor} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{linealpha} \PY{o}{=} \PY{o}{.}\PY{l+m+mi}{8}
+\end{Verbatim}
+
+
+    \hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+Rosiglitazone was authorized to enter the market for the treatment of
+type 2 diabetes in the United States in 1999 and in the European Union
+in 2000. New data subsequently emerged about possible cardiovascular
+risks associated with Rosiglitazone, confirmed by a meta-analysis in
+Nissen and Wolski (2007), which resulted in a European suspension of the
+Marketing Authorisation in 2010. This suspension included its use as a
+fixed-dose combination with metformin or glimepiride for type 2
+diabetes, which had been approved in 2003 for metformin and 2006 for
+glimepiride. The drug remained available in the United States, but only
+under a restricted-access program implemented in 2010.
+
+\hypertarget{when-to-approve-a-drug}{%
+\subsection{When to approve a drug?}\label{when-to-approve-a-drug}}
+
+Regulators focus on a few key factors when deciding whether a drug is
+fit to enter the market. In the case of Rosiglitazone, for example,
+previous work (Phillips et al.~2013). concentrated on 11 of the drug's
+effects, weighing positive effects against negative effects. Clinical
+trials data are presented to experts and clinicians to assess the safety
+of the drug. The clinical analysis of trial data is based on statistical
+summaries of the data, including averages, standard deviations, and
+signifiance levels. However, dependencies between the effects are the
+subject of clinical judgment and are rarely included in the statistical
+summaries.
+
+In this study, we address these issues by building a Bayesian model to
+do a full benefit-risk balance analysis of the dataset at the individual
+patient's level. Specifically, we construct a latent variable model to
+account for the whole joint distribution of the effects. This model will
+allow us to simulate the effect of the drug on a new patient conditioned
+on all the observations in the clinical trials. By quantifying the
+uncertainty of the effects of a drug treatment, given the available
+clinical trial datasets, our approach can inform whether regulators
+should approve a drug or not. This is done by combining clinical
+judgement as well samples for the model posterior using multi-criteria
+decision analysis (MCDA) via a Bayesian decision-theoretic framework,
+discussed in more detail in the Application section.
+
+\hypertarget{how-to-model-the-dependence-between-discrete-and-continuous-observations}{%
+\subsection{How to model the dependence between discrete and continuous
+observations?}\label{how-to-model-the-dependence-between-discrete-and-continuous-observations}}
+
+It is common in clinical trials to collect ``yes/no'' data. We want to
+fully model this process of interrelated dependencies, incorporate the
+dependence between the different measurements for each person, and
+account for uncertainty. Furthermore, datapoints collected in clinical
+trials are routinely of mixed type: binary, continuous, counts, etc. The
+main purpose of this work is to extend the current framework so that it
+can incorporate interdependencies between different features, both
+discrete and continuous.
+
+Our data is organized with one subject per row and one effect per
+column. For example, if our clinical trial dataset records 3 effects per
+subject, `Hemoglobin Levels' (continuous), `Nausea' (yes/no) and
+`Dyspepsia' (yes/no) the dataset would look like this:
+
+\begin{longtable}[]{@{}lllll@{}}
+\toprule
+Subject ID & Group Type & Hemoglobin Level & Dyspepsia &
+Nausea\tabularnewline
+\midrule
+\endhead
+123 & Control & 3.42 & 1 & 0\tabularnewline
+213 & Treatment & 4.41 & 1 & 0\tabularnewline
+431 & Control & 1.12 & 0 & 0\tabularnewline
+224 & Control & -0.11 & 1 & 0\tabularnewline
+224 & Treatment & 2.42 & 1 & 1\tabularnewline
+\bottomrule
+\end{longtable}
+
+To model the effects of a drug we need a generative model for these 3
+effects that also allows for dependencies between these effects. It
+stands to reason that the probability of a subject experiencing Nausea
+is not independent of the probability of experiencing Dyspepsia. To this
+end, we adopt a parametric generative model to learn the covariance
+matrix directly.
+
+We denote the observed data by \(y\) and the parameters of the model by
+\(\theta\). We are then interested in the posterior distribution
+\(\pi(\theta | y)\), with which we can draw samples from the
+distribution of effects \(f(y'|y)\) on future, so far unseen, patients
+\(y'\) conditional on observations \(y\) as follows:
+
+\[
+f(y'|y) = \int f(y'|y,\theta) \pi(\theta|y) d\theta
+\] In practice we cannot analytically derive the full posterior
+\(\pi(\theta | y)\), but we can get samples from it using \emph{Stan}.
+Consequently, we can approximate the expectation of any function
+\(h(y')\) on the future data \[
+\mathbb{E} (h (y') | y) = \int \int h(y') f(y'|y,\theta) \pi(\theta|y) d\theta dy' = \int h(y') f(y'|y) dy'
+\] using Monte Carlo.
+
+We assume that each subject is independently and identically distributed
+within its group. We run inference for each group separately and get two
+sets of parameters, one for the treatment group and one for the placebo,
+also known as control group. Using the samples from the predictive
+distribution of each group we can produce samples for the difference
+between the two groups. Generally, with these posterior samples we can
+compute any value of interest currently used to decide whether to
+approve the drug. As an application, we will later show what such an
+evaluation function looks like and work through a complete example (see
+Application section).
+
+\hypertarget{methodology}{%
+\section{Methodology}\label{methodology}}
+
+Let \(Y\) be a \(N\times K\) matrix where each column represents an
+effect and each row refers to an individual subject. This is our
+observations, our clinical trials dataset. In order to distinguish the
+treatment from placebo subjects, we will analyse the data for each group
+\(Y^T\) and \(Y^{C}\) separately. As the model for \(Y^T\) and \(Y^{C}\)
+is identical, we suppress the notation into \(Y\) in the remainder of
+this section for convenience. Recall that the important feature of the
+data is that each column in \(Y\) may be measured on different scales,
+i.e.~binary, count or continuous etc. The main purpose of this work is
+to extend the current framework so that it can incorporate
+interdependencies between different features, both discrete and
+continuous.
+
+We consider the following general latent variable framework. The idea to
+assign appropriate distributions on each column and apply appropriate
+transformations on their parameters via user specified link functions
+\(h_{j}(\cdot)\), so that everything is brought on the same scale. For
+example, let's fix our attention on the \(i\)-th subject for a moment.
+Then if the \(j\)-th effect is measured in the binary scale, the model
+can be
+
+\begin{equation}
+\label{eq:binary}
+\begin{cases}
+Y_{ij}\; \sim\; \text{Bernoulli}(\eta_j),\;i=1,\dots,N,\;Y_{ij} \text{ independent, for fixed } j\\
+h_{j}(\eta_j) \; = \; \mu_j + Z_{ij},\\
+\end{cases}
+\end{equation}
+
+where the link function can be the logit, probit or any other bijection
+from \([0, 1]\) to the real line. Similarly, for count data on the
+\(j\)-th column we can adopt the following model
+
+\begin{equation}
+\label{eq:counts}
+\begin{cases}
+Y_{ij}\; \sim\; \text{Poisson}(\eta_j),\;i=1,\dots,N,\;Y_{ij} \text{ independent, for fixed } j\\
+h_{j}(\eta_j) \; = \; \mu_j + Z_{ij}. 
+\end{cases}
+\end{equation}
+
+where \(h_{j}(\cdot)\) could be the natural logarithm, whereas for
+continuous data one can simply write
+
+\begin{equation}
+\label{eq:contain}
+Y_{ij}\; = \; \mu_j + Z_{ij},\;i=1,\dots,N.\\
+\end{equation}
+
+In order to complete the model we need to define the \(N\times K\)
+matrix \(Z\). Here we use a K-variate Normal distribution
+\(\mathcal{N}_K(\cdot)\) on each \(Z_{i :}\) row, such that
+
+\begin{equation}
+\label{eq:Zdist}
+Z_{i\cdot} \;\sim\; \mathcal{N}_{K}(0_{K},\Sigma),
+\end{equation}
+
+where \(\Sigma\) is a \(K\times K\) covariance matrix, \(O_{K}\) is a
+row \(K\)-dimensional vector with zeros and \(Z_{i\cdot}\) are
+independent for all \(i\). Of course other options are available, e.g.~a
+multivariate \(t\).
+
+In the model above, vector \(\mu=(\mu_{1},\dots,\mu_K)\) represents
+quantities related with the mean of each effect, whereas matrix
+\(\Sigma\) models their covariance. Note that the variance of binary
+variables is non identifiable (Chib and Greenberg (1998), Talhouk,
+Doucet, and Murphy (2012)), so we focus on the correlation matrix
+instead.
+
+    \hypertarget{stan-code}{%
+\section{Stan Code}\label{stan-code}}
+
+For this case study we use the Bernoulli likelihood for the binary data
+with a logit link function. The Stan program encoding this model is the
+following:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./modelcode.stan}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{file}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{file}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+data\{
+ int<lower=0> N;
+ int<lower=0> K;
+ int<lower=0> Kb;
+ int<lower=0> Kc;
+ int<lower=0, upper=1> yb[N,Kb];
+ vector[Kc] yc[N];
+\}
+
+transformed data \{
+  matrix[Kc, Kc] I = diag\_matrix(rep\_vector(1, Kc));
+\}
+parameters \{
+  vector[Kb] zb[N];
+  cholesky\_factor\_corr[K] L\_R;  // first continuous, then binary
+  vector<lower=0>[Kc] sigma;
+  vector[K] mu;
+\}
+
+transformed parameters\{
+  matrix[N, Kb] z;
+  vector[Kc] mu\_c = head(mu, Kc);
+  vector[Kb] mu\_b = tail(mu, Kb);
+  \{
+    matrix[Kc, Kc] L\_inv = mdivide\_left\_tri\_low(diag\_pre\_multiply(sigma, L\_R[1:Kc, 1:Kc]), I);
+    for (n in 1:N)\{
+      vector[Kc] resid = L\_inv * (yc[n] - mu\_c);
+      z[n,] = transpose(mu\_b + tail(L\_R * append\_row(resid, zb[n]), Kb));
+    \}
+  \}
+\}
+
+model\{
+  mu \textasciitilde{} normal(0,10);
+  L\_R \textasciitilde{} lkj\_corr\_cholesky(2);
+  sigma\textasciitilde{}cauchy(0,2.5);
+  yc \textasciitilde{} multi\_normal\_cholesky(mu\_c, diag\_pre\_multiply(sigma, L\_R[1:Kc, 1:Kc]));
+  for (n in 1:N) zb[n] \textasciitilde{} normal(0,1);
+  for (k in 1:Kb) yb[,k] \textasciitilde{} bernoulli\_logit(z[,k]);
+  
+\}
+
+generated quantities\{
+  matrix[K,K] R = multiply\_lower\_tri\_self\_transpose(L\_R);
+  vector[K] full\_sigma = append\_row(sigma,rep\_vector(1, Kb));
+  matrix[K,K] Sigma = multiply\_lower\_tri\_self\_transpose(diag\_pre\_multiply(full\_sigma,L\_R));
+
+\}
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./modelcode.stan}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{file}\PY{p}{:}
+            \PY{n}{model\PYZus{}code} \PY{o}{=} \PY{n}{file}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    We will fit the model with synthetic data that we generate as follows:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{def} \PY{n+nf}{C\PYZus{}to\PYZus{}R}\PY{p}{(}\PY{n}{M}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    Send a covariance matrix M to the corresponding}
+        \PY{l+s+sd}{    correlation matrix R}
+        \PY{l+s+sd}{    Inputs}
+        \PY{l+s+sd}{    ============}
+        \PY{l+s+sd}{    \PYZhy{} M : covariance matrix}
+        \PY{l+s+sd}{    Output}
+        \PY{l+s+sd}{    ============}
+        \PY{l+s+sd}{    \PYZhy{} correlation matrix}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+        
+            \PY{n}{d} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{M}\PY{o}{.}\PY{n}{diagonal}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+            \PY{n}{d2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{diag}\PY{p}{(}\PY{n}{d}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{o}{.}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+            \PY{n}{R} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{d2}\PY{p}{,} \PY{n}{M}\PY{p}{)}\PY{p}{,} \PY{n}{d2}\PY{p}{)}
+            \PY{k}{return} \PY{n}{R}
+        
+        
+        \PY{k}{def} \PY{n+nf}{gen\PYZus{}data}\PY{p}{(}\PY{n}{N}\PY{o}{=}\PY{l+m+mi}{400}\PY{p}{,} \PY{n}{Kb}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{Kc}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{random\PYZus{}seed}\PY{o}{=}\PY{l+m+mi}{234234999}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    Generate data of dimension [N, Kb+Kc]}
+        \PY{l+s+sd}{    Inputs}
+        \PY{l+s+sd}{    ============}
+        \PY{l+s+sd}{    \PYZhy{} N : number of rows/subjects}
+        \PY{l+s+sd}{    \PYZhy{} Kb : number of binary effects}
+        \PY{l+s+sd}{    \PYZhy{} Kc : number of conitnuous effects}
+        \PY{l+s+sd}{    Output}
+        \PY{l+s+sd}{    ============}
+        \PY{l+s+sd}{    \PYZhy{} correlation matrix}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{n}{random\PYZus{}seed}\PY{p}{)}
+        
+            \PY{n}{N1} \PY{o}{=} \PY{n}{N} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{2}  \PY{c+c1}{\PYZsh{} size of Group1}
+            \PY{n}{N2} \PY{o}{=} \PY{n}{N} \PY{o}{\PYZhy{}} \PY{n}{N1}  \PY{c+c1}{\PYZsh{} size of Group2}
+            \PY{n}{K} \PY{o}{=} \PY{n}{Kb} \PY{o}{+} \PY{n}{Kc}  \PY{c+c1}{\PYZsh{} total number of effects}
+        
+            \PY{n}{A} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{tril}\PY{p}{(}\PY{n}{uniform}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{n}{K}\PY{p}{,} \PY{n}{K}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            \PY{n}{C} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{A}\PY{p}{,} \PY{n}{A}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+            \PY{n}{R} \PY{o}{=} \PY{n}{C\PYZus{}to\PYZus{}R}\PY{p}{(}\PY{n}{C}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} Choose variances}
+            \PY{n}{sigma} \PY{o}{=} \PY{n}{uniform}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{n}{Kc}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} Construct the covariance matrix}
+            \PY{n}{D} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{diag}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{sigma}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{Kb}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}  
+            \PY{n}{Sigma} \PY{o}{=}  \PY{n}{np}\PY{o}{.}\PY{n}{diag}\PY{p}{(}\PY{n}{D}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{R}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{D}\PY{p}{)}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} Means for Group 1}
+            \PY{n}{mu\PYZus{}c} \PY{o}{=} \PY{n}{uniform}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{n}{Kc}\PY{p}{)}
+            \PY{n}{mu\PYZus{}b} \PY{o}{=} \PY{n}{uniform}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{n}{Kb}\PY{p}{)}
+            \PY{n}{mu1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{mu\PYZus{}c}\PY{p}{,} \PY{n}{mu\PYZus{}b}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Means for Group 2}
+            \PY{n}{mu2} \PY{o}{=} \PY{n}{mu1}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+            \PY{n}{mu2}\PY{p}{[}\PY{p}{:}\PY{n}{Kc}\PY{p}{]} \PY{o}{=} \PY{n}{mu2}\PY{p}{[}\PY{p}{:}\PY{n}{Kc}\PY{p}{]} \PY{o}{+} \PY{n}{uniform}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{n}{Kc}\PY{p}{)}
+            \PY{n}{mu2}\PY{p}{[}\PY{n}{Kc}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{mu2}\PY{p}{[}\PY{n}{Kc}\PY{p}{:}\PY{p}{]} \PY{o}{+} \PY{n}{uniform}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{o}{.}\PY{l+m+mi}{5}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{n}{Kb}\PY{p}{)}
+        
+        
+            \PY{c+c1}{\PYZsh{} group1}
+            \PY{n}{z} \PY{o}{=} \PY{n}{multivariate\PYZus{}normal}\PY{o}{.}\PY{n}{rvs}\PY{p}{(}\PY{n}{mean}\PY{o}{=}\PY{n}{mu1}\PY{p}{,} \PY{n}{cov}\PY{o}{=}\PY{n}{Sigma}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{n}{N1}\PY{p}{)}
+            \PY{n}{y1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{n}{z}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+            \PY{n}{y1}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{Kc}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{bernoulli}\PY{o}{.}\PY{n}{rvs}\PY{p}{(}\PY{n}{p}\PY{o}{=}\PY{n}{expit}\PY{p}{(}\PY{n}{z}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{Kc}\PY{p}{:}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+            \PY{n}{y1}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{n}{Kc}\PY{p}{]} \PY{o}{=} \PY{n}{z}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{n}{Kc}\PY{p}{]}
+        
+            \PY{c+c1}{\PYZsh{} group2}
+            \PY{n}{z} \PY{o}{=} \PY{n}{multivariate\PYZus{}normal}\PY{o}{.}\PY{n}{rvs}\PY{p}{(}\PY{n}{mean}\PY{o}{=}\PY{n}{mu2}\PY{p}{,} \PY{n}{cov}\PY{o}{=}\PY{n}{Sigma}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{n}{N2}\PY{p}{)}
+            \PY{n}{y2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{n}{z}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+            \PY{n}{y2}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{n}{Kc}\PY{p}{]} \PY{o}{=} \PY{n}{z}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{n}{Kc}\PY{p}{]}
+            \PY{n}{y2}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{Kc}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{bernoulli}\PY{o}{.}\PY{n}{rvs}\PY{p}{(}\PY{n}{p}\PY{o}{=}\PY{n}{expit}\PY{p}{(}\PY{n}{z}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{n}{Kb}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        
+        
+            \PY{k}{return} \PY{n}{y1}\PY{p}{,} \PY{n}{y2}\PY{p}{,} \PY{n}{mu1}\PY{p}{,} \PY{n}{mu2}\PY{p}{,} \PY{n}{R}\PY{p}{,} \PY{n}{sigma}\PY{p}{,} \PY{n}{N1}\PY{p}{,} \PY{n}{N2}\PY{p}{,} \PY{n}{Kb}\PY{p}{,} \PY{n}{Kc}
+\end{Verbatim}
+
+
+    It's good practice to save the data and posterior samples of the model
+fit to it. In our case, we will need it again when we demonstrate how to
+fit the model on the real datasets. For the purposes of this notebook,
+we will re-use this data in place of the hypothetical control group
+dataset. We can save the data and the samples as follows:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{y\PYZus{}control}\PY{p}{,} \PY{n}{y\PYZus{}treat}\PY{p}{,} \PY{n}{mu\PYZus{}control}\PY{p}{,} \PY{n}{mu\PYZus{}treat}\PY{p}{,} \PY{n}{R}\PY{p}{,} \PY{n}{sigma}\PY{p}{,} \PY{n}{N\PYZus{}control}\PY{p}{,} \PY{n}{N\PYZus{}treat}\PY{p}{,} \PY{n}{Kb}\PY{p}{,} \PY{n}{Kc} \PY{o}{=} \PY{n}{gen\PYZus{}data}\PY{p}{(}\PY{n}{N}\PY{o}{=}\PY{l+m+mi}{400}\PY{p}{,} \PY{n}{Kb}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{Kc}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{data\PYZus{}control} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{n}{N}\PY{o}{=}\PY{n}{N\PYZus{}control}\PY{p}{,} \PY{n}{Kb}\PY{o}{=}\PY{n}{Kb}\PY{p}{,} \PY{n}{Kc}\PY{o}{=}\PY{n}{Kc}\PY{p}{,} \PY{n}{K}\PY{o}{=}\PY{n}{Kb}\PY{o}{+}\PY{n}{Kc}\PY{p}{,} \PY{n}{yb}\PY{o}{=}\PY{n}{y\PYZus{}control}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{Kc}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}\PY{p}{,}\PY{n}{yc}\PY{o}{=}\PY{n}{y\PYZus{}control}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{n}{Kc}\PY{p}{]}\PY{p}{)}
+        \PY{n}{pickle}\PY{o}{.}\PY{n}{dump}\PY{p}{(}\PY{n}{data\PYZus{}control}\PY{p}{,} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data\PYZus{}control.pkl}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wb}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{data\PYZus{}treat} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{n}{N}\PY{o}{=}\PY{n}{N\PYZus{}treat}\PY{p}{,} \PY{n}{Kb}\PY{o}{=}\PY{n}{Kb}\PY{p}{,} \PY{n}{Kc}\PY{o}{=}\PY{n}{Kc}\PY{p}{,} \PY{n}{K}\PY{o}{=}\PY{n}{Kb}\PY{o}{+}\PY{n}{Kc}\PY{p}{,} \PY{n}{yb}\PY{o}{=}\PY{n}{y\PYZus{}treat}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{Kc}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}\PY{p}{,}\PY{n}{yc}\PY{o}{=}\PY{n}{y\PYZus{}treat}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{n}{Kc}\PY{p}{]}\PY{p}{)}
+        \PY{n}{pickle}\PY{o}{.}\PY{n}{dump}\PY{p}{(}\PY{n}{data\PYZus{}treat}\PY{p}{,} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data\PYZus{}treat.pkl}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wb}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    We compile the model with the following code.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{sm} \PY{o}{=} \PY{n}{pystan}\PY{o}{.}\PY{n}{StanModel}\PY{p}{(}\PY{n}{model\PYZus{}code}\PY{o}{=}\PY{n}{model\PYZus{}code}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+INFO:pystan:COMPILING THE C++ CODE FOR MODEL anon\_model\_347c6f238e43a7a07dd740d8cd0f121c NOW.
+INFO:pystan:OS: linux, Python: 3.6.4 | packaged by conda-forge | (default, Dec 23 2017, 16:31:06) 
+[GCC 4.8.2 20140120 (Red Hat 4.8.2-15)], Cython 0.27.3
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Compiling /tmp/tmpb4rve1pc/stanfit4anon\_model\_347c6f238e43a7a07dd740d8cd0f121c\_5665979181223622033.pyx because it changed.
+[1/1] Cythonizing /tmp/tmpb4rve1pc/stanfit4anon\_model\_347c6f238e43a7a07dd740d8cd0f121c\_5665979181223622033.pyx
+building 'stanfit4anon\_model\_347c6f238e43a7a07dd740d8cd0f121c\_5665979181223622033' extension
+creating /tmp/tmpb4rve1pc/tmp
+creating /tmp/tmpb4rve1pc/tmp/tmpb4rve1pc
+gcc -pthread -Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -DBOOST\_RESULT\_OF\_USE\_TR1 -DBOOST\_NO\_DECLTYPE -DBOOST\_DISABLE\_ASSERTS -I/tmp/tmpb4rve1pc -I/home/marianne/miniconda3/envs/pystan/lib/python3.6/site-packages/pystan -I/home/marianne/miniconda3/envs/pystan/lib/python3.6/site-packages/pystan/stan/src -I/home/marianne/miniconda3/envs/pystan/lib/python3.6/site-packages/pystan/stan/lib/stan\_math -I/home/marianne/miniconda3/envs/pystan/lib/python3.6/site-packages/pystan/stan/lib/stan\_math/lib/eigen\_3.3.3 -I/home/marianne/miniconda3/envs/pystan/lib/python3.6/site-packages/pystan/stan/lib/stan\_math/lib/boost\_1.64.0 -I/home/marianne/miniconda3/envs/pystan/lib/python3.6/site-packages/pystan/stan/lib/stan\_math/lib/cvodes\_2.9.0/include -I/home/marianne/miniconda3/envs/pystan/lib/python3.6/site-packages/numpy/core/include -I/home/marianne/miniconda3/envs/pystan/include/python3.6m -c /tmp/tmpb4rve1pc/stanfit4anon\_model\_347c6f238e43a7a07dd740d8cd0f121c\_5665979181223622033.cpp -o /tmp/tmpb4rve1pc/tmp/tmpb4rve1pc/stanfit4anon\_model\_347c6f238e43a7a07dd740d8cd0f121c\_5665979181223622033.o -O2 -ftemplate-depth-256 -Wno-unused-function -Wno-uninitialized
+g++ -pthread -shared -L/home/marianne/miniconda3/envs/pystan/lib -Wl,-rpath=/home/marianne/miniconda3/envs/pystan/lib,--no-as-needed -L/home/marianne/miniconda3/envs/pystan/lib -Wl,-rpath=/home/marianne/miniconda3/envs/pystan/lib,--no-as-needed /tmp/tmpb4rve1pc/tmp/tmpb4rve1pc/stanfit4anon\_model\_347c6f238e43a7a07dd740d8cd0f121c\_5665979181223622033.o -L/home/marianne/miniconda3/envs/pystan/lib -lpython3.6m -o /tmp/tmpb4rve1pc/stanfit4anon\_model\_347c6f238e43a7a07dd740d8cd0f121c\_5665979181223622033.cpython-36m-x86\_64-linux-gnu.so
+
+    \end{Verbatim}
+
+    We fit the model with the following code
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{fit} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{sampling}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{data\PYZus{}control}\PY{p}{,} \PY{n+nb}{iter}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{chains}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/marianne/miniconda3/envs/pystan/lib/python3.6/site-packages/pystan/misc.py:399: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  elif np.issubdtype(np.asarray(v).dtype, float):
+
+    \end{Verbatim}
+
+    We save the extracted samples to be used later again
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{post\PYZus{}samples} \PY{o}{=} \PY{n}{fit}\PY{o}{.}\PY{n}{extract}\PY{p}{(}\PY{n}{permuted}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}  \PY{c+c1}{\PYZsh{} return a dictionary of arrays}
+         \PY{n}{pickle}\PY{o}{.}\PY{n}{dump}\PY{p}{(}\PY{n}{post\PYZus{}samples}\PY{p}{,} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{fit\PYZus{}control.pkl}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wb}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    To avoid waiting we can load the pre-fit result as follows:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{post\PYZus{}samples} \PY{o}{=} \PY{n}{pickle}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{fit\PYZus{}control.pkl}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rb}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{model-diagnostics}{%
+\subsection{Model Diagnostics}\label{model-diagnostics}}
+
+We see that max \texttt{Rhat} values are good, below 1.01. The effective
+sample size \texttt{n\_eff} is good and the rest of the diagnostics are
+clean. Below we plot histograms of posterior samples for the mean,
+correlations and variance of the effects against the true values.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{fit}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Inference for Stan model: anon\_model\_347c6f238e43a7a07dd740d8cd0f121c.
+4 chains, each with iter=1000; warmup=500; thin=1; 
+post-warmup draws per chain=500, total post-warmup draws=2000.
+
+                mean se\_mean     sd   2.5\%    25\%    50\%    75\%  97.5\%  n\_eff   Rhat
+zb[0,0]         0.43    0.02   0.88  -1.34  -0.14   0.44   1.01   2.15   2000    1.0
+zb[1,0]        -0.45    0.02    0.9   -2.2  -1.04  -0.41   0.19   1.26   2000    1.0
+zb[2,0]         0.67    0.02   0.92  -1.17   0.05   0.66   1.28   2.43   2000    1.0
+zb[3,0]         0.69    0.02   0.91  -1.04   0.06   0.68   1.31   2.52   2000    1.0
+zb[4,0]         0.71    0.02   0.89  -1.04    0.1   0.72   1.34    2.4   2000    1.0
+zb[5,0]        -0.29    0.02   0.91  -2.09  -0.87  -0.27   0.29    1.5   2000    1.0
+zb[6,0]         -0.2    0.02   0.94  -2.07  -0.82  -0.19   0.43   1.66   2000    1.0
+zb[7,0]         0.36    0.02   0.91  -1.41  -0.26   0.36   0.97   2.16   2000    1.0
+zb[8,0]         0.38    0.02   0.89  -1.36  -0.24    0.4   0.96   2.11   2000    1.0
+zb[9,0]         0.66    0.02   0.89  -1.16    0.1   0.67   1.25   2.37   2000    1.0
+zb[10,0]       -0.34    0.02   0.88  -2.15   -0.9  -0.32   0.25   1.34   2000    1.0
+zb[11,0]       -0.05    0.02   0.91  -1.88  -0.68  -0.05   0.57   1.69   2000    1.0
+zb[12,0]        0.36    0.02   0.91  -1.36  -0.27   0.34   0.97   2.21   2000    1.0
+zb[13,0]       -0.41    0.02   0.95  -2.34  -1.04  -0.43   0.24   1.45   2000    1.0
+zb[14,0]       -0.19    0.02   0.91  -2.01  -0.81   -0.2   0.42   1.59   2000    1.0
+zb[15,0]       -0.22    0.02   0.96  -2.21  -0.87  -0.18   0.44   1.67   2000    1.0
+zb[16,0]        0.35    0.02   0.87   -1.4   -0.2   0.36   0.91   2.04   2000    1.0
+zb[17,0]       -0.48    0.02   0.91  -2.24  -1.08  -0.44   0.13   1.28   2000    1.0
+zb[18,0]       -0.11    0.02   0.92  -1.98   -0.7   -0.1   0.54   1.65   2000    1.0
+zb[19,0]       -0.16    0.02   0.92  -1.95  -0.79  -0.16   0.45   1.64   2000    1.0
+zb[20,0]       -0.25    0.02    0.9  -2.04  -0.82  -0.21   0.33   1.52   2000    1.0
+zb[21,0]       -0.28    0.02   0.94   -2.2   -0.9  -0.29   0.37   1.53   2000    1.0
+zb[22,0]       -0.45    0.02   0.93  -2.28  -1.08  -0.44   0.17   1.42   2000    1.0
+zb[23,0]         0.3    0.02   0.94  -1.52  -0.31   0.28   0.91   2.15   2000    1.0
+zb[24,0]       -0.21    0.02   0.97  -2.21  -0.86  -0.24   0.42   1.75   2000    1.0
+zb[25,0]       -0.32    0.02   0.91  -2.07  -0.94   -0.3    0.3   1.47   2000    1.0
+zb[26,0]       -0.37    0.02   0.96  -2.34  -1.02  -0.36   0.28   1.53   2000    1.0
+zb[27,0]        -0.1    0.02   0.87  -1.92  -0.69  -0.08   0.48   1.56   2000    1.0
+zb[28,0]         0.4    0.02   0.93  -1.37  -0.24   0.41   0.99   2.28   2000    1.0
+zb[29,0]       -0.02    0.02   0.93  -1.86  -0.61  -0.02   0.59    1.8   2000    1.0
+zb[30,0]       -0.13    0.02   0.89  -1.87  -0.72  -0.12   0.48   1.61   2000    1.0
+zb[31,0]        -0.3    0.02   0.88  -2.11  -0.88   -0.3   0.31   1.36   2000    1.0
+zb[32,0]        -0.1    0.02    0.9  -1.88  -0.69  -0.09   0.49   1.66   2000    1.0
+zb[33,0]        -0.1    0.02    0.9  -1.89   -0.7  -0.09    0.5   1.69   2000    1.0
+zb[34,0]        0.37    0.02   0.92  -1.54  -0.24   0.39   1.01   2.19   2000    1.0
+zb[35,0]        0.35    0.02   0.91  -1.46  -0.26   0.34   0.97   2.17   2000    1.0
+zb[36,0]        0.36    0.02   0.91  -1.32  -0.26   0.36   0.98   2.15   2000    1.0
+zb[37,0]        0.72    0.02   0.96  -1.13   0.06   0.73   1.38   2.63   2000    1.0
+zb[38,0]        0.77    0.02    0.9  -0.94   0.17   0.78   1.38   2.49   2000    1.0
+zb[39,0]        0.35    0.02   0.91  -1.48  -0.25   0.35   0.98   2.17   2000    1.0
+zb[40,0]       -0.11    0.02   0.92  -1.94  -0.73  -0.11   0.51   1.62   2000    1.0
+zb[41,0]        -0.1    0.02   0.91  -1.89  -0.73   -0.1   0.51   1.63   2000    1.0
+zb[42,0]       -0.18    0.02   0.94  -1.99  -0.81  -0.19   0.46   1.67   2000    1.0
+zb[43,0]       -0.16    0.02   0.95  -1.95   -0.8  -0.14   0.48   1.73   2000    1.0
+zb[44,0]        0.46    0.02   0.92  -1.32  -0.19   0.47   1.08   2.22   2000    1.0
+zb[45,0]       -0.37    0.02   0.91  -2.19  -0.95  -0.35   0.23    1.3   2000    1.0
+zb[46,0]       -0.36    0.02   0.93  -2.19  -0.99  -0.35   0.25   1.49   2000    1.0
+zb[47,0]        0.42    0.02   0.91  -1.34   -0.2   0.42   1.04   2.22   2000    1.0
+zb[48,0]        0.66    0.02   0.92  -1.17   0.04   0.66    1.3   2.47   2000    1.0
+zb[49,0]       -0.27    0.02   0.92  -2.03  -0.92  -0.26   0.39   1.51   2000    1.0
+zb[50,0]       -0.09    0.02   0.93  -1.91   -0.7  -0.08   0.55   1.71   2000    1.0
+zb[51,0]        -0.4    0.02   0.94  -2.24  -1.03  -0.38   0.22   1.44   2000    1.0
+zb[52,0]       -0.12    0.02   0.95  -2.05  -0.73  -0.09   0.52   1.63   2000    1.0
+zb[53,0]       -0.07    0.02   0.94  -1.98  -0.71  -0.04   0.56   1.68   2000    1.0
+zb[54,0]       -0.01    0.02   0.92  -1.77  -0.67-3.1e-3   0.64    1.7   2000    1.0
+zb[55,0]        0.42    0.02   0.95  -1.42  -0.24   0.42   1.07   2.28   2000    1.0
+[snip] ---8<--- [/snip]
+z[186,3]       -0.98    0.02   0.91  -2.75  -1.61  -0.97  -0.36    0.7   2000    1.0
+z[187,3]       -0.27    0.02   0.91  -2.08  -0.88  -0.29   0.35   1.51   2000    1.0
+z[188,3]       -0.75    0.02   1.08  -2.82  -1.48  -0.78  -0.03   1.28   2000    1.0
+z[189,3]       -0.78    0.02   0.91  -2.65  -1.37  -0.76  -0.18   0.96   2000    1.0
+z[190,3]       -1.37    0.02   0.91  -3.14   -2.0   -1.4  -0.76   0.48   2000    1.0
+z[191,3]       -1.04    0.02   0.89  -2.81  -1.64  -1.02  -0.42   0.65   2000    1.0
+z[192,3]       -0.82    0.02    0.9   -2.6   -1.4  -0.82  -0.22   0.92   2000    1.0
+z[193,3]       -0.73    0.02   0.92  -2.62  -1.34  -0.75  -0.09   1.05   2000    1.0
+z[194,3]       -0.99    0.02    0.9  -2.86  -1.58  -0.96  -0.38    0.8   2000    1.0
+z[195,3]       -0.38    0.02   1.03  -2.51  -1.02  -0.34   0.29   1.56   2000    1.0
+z[196,3]       -0.04    0.02    0.9  -1.79  -0.65  -0.05   0.57   1.77   2000    1.0
+z[197,3]       -1.14    0.02   0.94  -3.09  -1.75  -1.13  -0.51   0.68   2000    1.0
+z[198,3]        -0.2    0.02   0.87   -2.0   -0.8  -0.21   0.39   1.44   2000    1.0
+z[199,3]       -0.86    0.02   0.86  -2.58  -1.44  -0.87  -0.28   0.83   2000    1.0
+mu\_c[0]        -7.31  3.5e-3   0.16  -7.63  -7.42  -7.31   -7.2  -7.01   2000    1.0
+mu\_c[1]         -2.3  1.7e-3   0.07  -2.45  -2.36   -2.3  -2.25  -2.16   2000    1.0
+mu\_b[0]        -0.88  4.0e-3   0.18  -1.22  -0.99  -0.87  -0.76  -0.51   2000    1.0
+mu\_b[1]        -0.57  4.0e-3   0.18  -0.92  -0.69  -0.58  -0.44  -0.21   2000    1.0
+mu\_b[2]        -0.41  3.8e-3   0.17  -0.75  -0.53  -0.41   -0.3  -0.07   2000    1.0
+mu\_b[3]        -0.67  3.9e-3   0.17   -1.0  -0.78  -0.67  -0.55  -0.33   2000    1.0
+R[0,0]           1.0     0.0    0.0    1.0    1.0    1.0    1.0    1.0   2000    nan
+R[1,0]         -0.11  1.6e-3   0.07  -0.25  -0.16  -0.11  -0.06   0.02   2000    1.0
+R[2,0]          0.08  3.6e-3   0.16  -0.23  -0.03   0.08    0.2    0.4   2000    1.0
+R[3,0]         -0.12  3.6e-3   0.16  -0.45  -0.23  -0.12  -0.02   0.19   2000    1.0
+R[4,0]         -0.12  3.4e-3   0.15  -0.42  -0.23  -0.12  -0.02   0.18   2000    1.0
+R[5,0]         -0.13  3.4e-3   0.15  -0.43  -0.24  -0.13  -0.03   0.18   2000    1.0
+R[0,1]         -0.11  1.6e-3   0.07  -0.25  -0.16  -0.11  -0.06   0.02   2000    1.0
+R[1,1]           1.0 2.1e-189.4e-17    1.0    1.0    1.0    1.0    1.0   2000    nan
+R[2,1]         -0.21  3.6e-3   0.16  -0.52  -0.32  -0.21   -0.1    0.1   2000    1.0
+R[3,1]          0.08  3.4e-3   0.15  -0.22  -0.02   0.08   0.19   0.38   2000    1.0
+R[4,1]          0.08  3.6e-3   0.16  -0.23  -0.02   0.08   0.19   0.39   2000    1.0
+R[5,1]          0.17  3.6e-3   0.16  -0.15   0.06   0.18   0.29   0.47   2000    1.0
+R[0,2]          0.08  3.6e-3   0.16  -0.23  -0.03   0.08    0.2    0.4   2000    1.0
+R[1,2]         -0.21  3.6e-3   0.16  -0.52  -0.32  -0.21   -0.1    0.1   2000    1.0
+R[2,2]           1.0 2.1e-189.2e-17    1.0    1.0    1.0    1.0    1.0   2000    nan
+R[3,2]         -0.12    0.01    0.3  -0.65  -0.34  -0.14   0.08   0.49    504    1.0
+R[4,2]          0.32    0.01   0.26  -0.24   0.15   0.35   0.51   0.77    489   1.01
+R[5,2]         -0.16    0.01   0.29  -0.67  -0.38  -0.17   0.03   0.43    456    1.0
+R[0,3]         -0.12  3.6e-3   0.16  -0.45  -0.23  -0.12  -0.02   0.19   2000    1.0
+R[1,3]          0.08  3.4e-3   0.15  -0.22  -0.02   0.08   0.19   0.38   2000    1.0
+R[2,3]         -0.12    0.01    0.3  -0.65  -0.34  -0.14   0.08   0.49    504    1.0
+R[3,3]           1.0 2.3e-189.6e-17    1.0    1.0    1.0    1.0    1.0   1832    nan
+R[4,3]         -0.04    0.02   0.28   -0.6  -0.24  -0.05   0.16   0.49    327   1.02
+R[5,3]          -0.1    0.01   0.29  -0.63  -0.32   -0.1   0.11   0.48    533    1.0
+R[0,4]         -0.12  3.4e-3   0.15  -0.42  -0.23  -0.12  -0.02   0.18   2000    1.0
+R[1,4]          0.08  3.6e-3   0.16  -0.23  -0.02   0.08   0.19   0.39   2000    1.0
+R[2,4]          0.32    0.01   0.26  -0.24   0.15   0.35   0.51   0.77    489   1.01
+R[3,4]         -0.04    0.02   0.28   -0.6  -0.24  -0.05   0.16   0.49    327   1.02
+R[4,4]           1.0 1.7e-187.7e-17    1.0    1.0    1.0    1.0    1.0   2000    nan
+R[5,4]          0.03    0.01   0.28  -0.52  -0.17   0.03   0.22   0.56    593   1.01
+R[0,5]         -0.13  3.4e-3   0.15  -0.43  -0.24  -0.13  -0.03   0.18   2000    1.0
+R[1,5]          0.17  3.6e-3   0.16  -0.15   0.06   0.18   0.29   0.47   2000    1.0
+R[2,5]         -0.16    0.01   0.29  -0.67  -0.38  -0.17   0.03   0.43    456    1.0
+R[3,5]          -0.1    0.01   0.29  -0.63  -0.32   -0.1   0.11   0.48    533    1.0
+R[4,5]          0.03    0.01   0.28  -0.52  -0.17   0.03   0.22   0.56    593   1.01
+R[5,5]           1.0 1.9e-188.4e-17    1.0    1.0    1.0    1.0    1.0   2000    nan
+full\_sigma[0]   2.26  2.6e-3   0.12   2.04   2.18   2.26   2.33   2.51   2000    1.0
+full\_sigma[1]   1.07  1.2e-3   0.06   0.96   1.03   1.06    1.1   1.18   2000    1.0
+full\_sigma[2]    1.0     0.0    0.0    1.0    1.0    1.0    1.0    1.0   2000    nan
+full\_sigma[3]    1.0     0.0    0.0    1.0    1.0    1.0    1.0    1.0   2000    nan
+full\_sigma[4]    1.0     0.0    0.0    1.0    1.0    1.0    1.0    1.0   2000    nan
+full\_sigma[5]    1.0     0.0    0.0    1.0    1.0    1.0    1.0    1.0   2000    nan
+Sigma[0,0]      5.12    0.01   0.54   4.18   4.75   5.09   5.45   6.28   2000    1.0
+Sigma[1,0]     -0.28  3.9e-3   0.17  -0.62  -0.39  -0.27  -0.16   0.06   2000    1.0
+Sigma[2,0]      0.19  8.3e-3   0.37  -0.52  -0.07   0.18   0.44   0.92   2000    1.0
+Sigma[3,0]     -0.28  8.2e-3   0.37  -1.01  -0.52  -0.26  -0.04   0.42   2000    1.0
+Sigma[4,0]     -0.28  7.8e-3   0.35  -0.97  -0.51  -0.27  -0.04   0.42   2000    1.0
+Sigma[5,0]      -0.3  7.8e-3   0.35  -0.98  -0.53  -0.29  -0.06    0.4   2000    1.0
+Sigma[0,1]     -0.28  3.9e-3   0.17  -0.62  -0.39  -0.27  -0.16   0.06   2000    1.0
+Sigma[1,1]      1.14  2.7e-3   0.12   0.93   1.06   1.13   1.22   1.39   2000    1.0
+Sigma[2,1]     -0.23  3.9e-3   0.17  -0.57  -0.35  -0.23  -0.11   0.11   2000    1.0
+Sigma[3,1]      0.09  3.7e-3   0.16  -0.24  -0.02   0.09    0.2    0.4   2000    1.0
+Sigma[4,1]      0.09  3.8e-3   0.17  -0.25  -0.03   0.09   0.21   0.43   2000    1.0
+Sigma[5,1]      0.18  3.9e-3   0.17  -0.16   0.07   0.19    0.3   0.52   2000    1.0
+Sigma[0,2]      0.19  8.3e-3   0.37  -0.52  -0.07   0.18   0.44   0.92   2000    1.0
+Sigma[1,2]     -0.23  3.9e-3   0.17  -0.57  -0.35  -0.23  -0.11   0.11   2000    1.0
+Sigma[2,2]       1.0 2.1e-189.2e-17    1.0    1.0    1.0    1.0    1.0   2000    nan
+Sigma[3,2]     -0.12    0.01    0.3  -0.65  -0.34  -0.14   0.08   0.49    504    1.0
+Sigma[4,2]      0.32    0.01   0.26  -0.24   0.15   0.35   0.51   0.77    489   1.01
+Sigma[5,2]     -0.16    0.01   0.29  -0.67  -0.38  -0.17   0.03   0.43    456    1.0
+Sigma[0,3]     -0.28  8.2e-3   0.37  -1.01  -0.52  -0.26  -0.04   0.42   2000    1.0
+Sigma[1,3]      0.09  3.7e-3   0.16  -0.24  -0.02   0.09    0.2    0.4   2000    1.0
+Sigma[2,3]     -0.12    0.01    0.3  -0.65  -0.34  -0.14   0.08   0.49    504    1.0
+Sigma[3,3]       1.0 2.3e-189.6e-17    1.0    1.0    1.0    1.0    1.0   1832    nan
+Sigma[4,3]     -0.04    0.02   0.28   -0.6  -0.24  -0.05   0.16   0.49    327   1.02
+Sigma[5,3]      -0.1    0.01   0.29  -0.63  -0.32   -0.1   0.11   0.48    533    1.0
+Sigma[0,4]     -0.28  7.8e-3   0.35  -0.97  -0.51  -0.27  -0.04   0.42   2000    1.0
+Sigma[1,4]      0.09  3.8e-3   0.17  -0.25  -0.03   0.09   0.21   0.43   2000    1.0
+Sigma[2,4]      0.32    0.01   0.26  -0.24   0.15   0.35   0.51   0.77    489   1.01
+Sigma[3,4]     -0.04    0.02   0.28   -0.6  -0.24  -0.05   0.16   0.49    327   1.02
+Sigma[4,4]       1.0 1.7e-187.7e-17    1.0    1.0    1.0    1.0    1.0   2000    nan
+Sigma[5,4]      0.03    0.01   0.28  -0.52  -0.17   0.03   0.22   0.56    593   1.01
+Sigma[0,5]      -0.3  7.8e-3   0.35  -0.98  -0.53  -0.29  -0.06    0.4   2000    1.0
+Sigma[1,5]      0.18  3.9e-3   0.17  -0.16   0.07   0.19    0.3   0.52   2000    1.0
+Sigma[2,5]     -0.16    0.01   0.29  -0.67  -0.38  -0.17   0.03   0.43    456    1.0
+Sigma[3,5]      -0.1    0.01   0.29  -0.63  -0.32   -0.1   0.11   0.48    533    1.0
+Sigma[4,5]      0.03    0.01   0.28  -0.52  -0.17   0.03   0.22   0.56    593   1.01
+Sigma[5,5]       1.0 1.9e-188.4e-17    1.0    1.0    1.0    1.0    1.0   2000    nan
+lp\_\_           -1239    0.74  20.85  -1281  -1253  -1239  -1225  -1201    784    1.0
+
+Samples were drawn using NUTS at Wed Feb 14 15:48:18 2018.
+For each parameter, n\_eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction factor on split chains (at 
+convergence, Rhat=1).
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{K} \PY{o}{=} \PY{n}{Kb} \PY{o}{+} \PY{n}{Kc}
+         \PY{n}{title} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Mean Values}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{true\PYZus{}values} \PY{o}{=} \PY{n}{mu\PYZus{}control}
+         \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{post\PYZus{}samples}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{df}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{n+nb}{str}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{K}\PY{p}{)}\PY{p}{]}
+         
+         \PY{n}{ax} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{subplots}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{n}{title}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{n}{color}\PY{p}{,}
+                           \PY{n}{sharex}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{sharey} \PY{o}{=}\PY{k+kc}{False}\PY{p}{,}
+                           \PY{n}{alpha}\PY{o}{=}\PY{n}{alpha}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{n}{bins}\PY{p}{,}
+                           \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n}{ax}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{true\PYZus{}values}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{n}{linecolor}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{n}{linealpha}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{n}{linestyle}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{n}{lw}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{title} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Sigma Values}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{true\PYZus{}values} \PY{o}{=} \PY{n}{sigma}
+         \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{post\PYZus{}samples}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sigma}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{df}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{n+nb}{str}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{Kc}\PY{p}{)}\PY{p}{]}
+         
+         \PY{n}{ax} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{subplots}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{n}{title}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{n}{color}\PY{p}{,}
+                           \PY{n}{sharex}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{sharey} \PY{o}{=}\PY{k+kc}{False}\PY{p}{,}
+                           \PY{n}{alpha}\PY{o}{=}\PY{n}{alpha}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{n}{bins}\PY{p}{,}
+                           \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n}{ax}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{true\PYZus{}values}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{n}{linecolor}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{n}{linealpha}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{n}{linestyle}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{n}{lw}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{k}{def} \PY{n+nf}{flatten\PYZus{}corr}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n}{a}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{triu\PYZus{}indices}\PY{p}{(}\PY{n}{a}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
+         
+         
+         \PY{n}{title} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Correlation Values}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{true\PYZus{}values}\PY{o}{=} \PY{n}{R}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{triu\PYZus{}indices}\PY{p}{(}\PY{n}{R}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
+         
+         
+         \PY{n}{Rs} \PY{o}{=} \PY{n}{post\PYZus{}samples}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{R}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{num\PYZus{}of\PYZus{}samples} \PY{o}{=} \PY{n}{Rs}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         
+         \PY{n}{colnames} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n+nb}{str}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{K}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+         \PY{n}{cnames} \PY{o}{=} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{colnames}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{triu\PYZus{}indices}\PY{p}{(}\PY{n}{colnames}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{,}
+                      \PY{n}{colnames}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{triu\PYZus{}indices}\PY{p}{(}\PY{n}{colnames}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{cnames} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{cnames}\PY{p}{)}
+         
+         \PY{n}{M} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{cnames}\PY{p}{)}
+         \PY{n}{fRs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{p}{(}\PY{n}{num\PYZus{}of\PYZus{}samples}\PY{p}{,} \PY{n}{M}\PY{p}{)}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range} \PY{p}{(}\PY{n}{num\PYZus{}of\PYZus{}samples}\PY{p}{)}\PY{p}{:}
+             \PY{n}{fRs}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{flatten\PYZus{}corr}\PY{p}{(}\PY{n}{Rs}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{fRs}\PY{p}{)}
+         \PY{n}{df}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{n}{cnames}
+         
+         
+         \PY{n}{ax} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{subplots}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{n}{title}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{n}{color}\PY{p}{,}
+                           \PY{n}{sharex}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{sharey} \PY{o}{=}\PY{k+kc}{False}\PY{p}{,}
+                           \PY{n}{alpha}\PY{o}{=}\PY{n}{alpha}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{n}{bins}\PY{p}{,}
+                           \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n}{ax}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{true\PYZus{}values}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{n}{linecolor}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{n}{linealpha}\PY{p}{,} \PY{n}{linestyle}\PY{o}{=}\PY{n}{linestyle}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{n}{lw}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{application}{%
+\section{Application}\label{application}}
+
+In order to use the measurements in the clinical trial to make a final
+decision on market readiness, we need an evaluation function. Here we
+describe one such function that uses Multicriteria Decision Analysis
+(MCDA). The process of constructing such a function is somewhat involved
+because it requires collaboration of expertise from various fields. This
+section is adapted from Phillips et al. (2015).
+
+\hypertarget{how-to-compare-disparate-effects}{%
+\subsection{How to compare disparate
+effects?}\label{how-to-compare-disparate-effects}}
+
+In order to meaningfully compare the various effects, such as glucose
+levels, weight loss, and cardiovascular arrest, we need to transform
+physical measurements to a scale appropriate to the task in hand, in
+this case, treating type II diabetes. For example, how are we to compare
+an average reduction of 5\% in Hemoglobin levels against an average 3\%
+increase in weight? We compare these effects and their relevant
+importance in a two-step process. First, we bring all measurements to a
+common denominator, called ``preference score.'' Then, we ask clinicians
+to assign a weight to each effect based on its importance relative to
+the drug's treatment potential. Note that, by design, this mapping is
+subjective so that it can reflect the judgement of the clinicians. We
+leave it to the clinicians to decide whether a 1\% reduction of
+Hemoglobin levels outweigh the damage of 3\% increase in weight.
+
+For example, one of effect for the assessment of Rosiglitazone is
+``Nausea''. For step one, we need to start from a reasonable expected
+range for this effect in any given trial, let's say the percentage of
+subjects experiencing ``Nausea'' ranges from 0 to 10 in percentage units
+(\%). The ``preference score'' is essentially a map from {[}0,10{]} onto
+{[}0,100{]} such that 0 corresponds to the least desirable measurement,
+10 \%, and 100 the most desirable one, 0\%. With the two extremes fixed,
+the map can take any form in between. In this study will use linear maps
+for simplicity. Each effect gets it's own ``preference score'' map from
+its own range to {[}0,100{]}. This way we can track, on a common scale,
+how \emph{clinically desirable} each observation is. In step two, each
+effect is given a weight \(w_j\) that corresponds to the importance of
+moving from ``preference score'' 0 to 100. Finally, we need to normalize
+the weights to ensure they sum to 1.
+
+\hypertarget{how-to-score-a-drug}{%
+\subsection{How to score a drug?}\label{how-to-score-a-drug}}
+
+With this scoring system we can estimate the effect of a drug on a new
+patient. For a given measurement we simply take a weighted sum of the
+``preference scores''. Specifically for the \(j\)-th effect, let's
+assume that \(c_j(\cdot)\) is the ``preference score'' map. Also let
+\(y_j^{(T)}\) be the measurement in the treatment group and
+\(y_j^{(C)}\) be the corresponding measurement in the control group. We
+then get a final score of
+\[s = \sum_j w_j \cdot \big( c_j \big(y_j^{(T)}\big) - c_j \big(y_j^{(C)}\big) \big) \]
+Thus we can decided if the treatment is beneficial (when the sum is
+positive), or not (the sum is negative).
+
+Since there is noise in the data, the final score is noisy too. With the
+Bayesian model suggested here, we can use our posterior samples to
+propagate the uncertainty to the final score. We do this for each group
+separately and with the posterior samples we can estimate the
+probability of interest, \(P(s^{(T)} > s^{(C)})\) .
+
+\hypertarget{a-worked-out-example}{%
+\subsection{A worked out example}\label{a-worked-out-example}}
+
+Here we will present a full example starting from the observational data
+to the final score. In this example we assess the safety of
+Rosiglitazone drug for type II diabetes by comparing the distribution of
+the final score for the treatment group (152 subjects) and the control
+group (150 subjects). The first two columns capture Hemoglobin and
+Glucose levels respectively, as deviations from the baseline recorded
+when the subjects entered treatment. The last four columns record four
+different events, Diarrhea, Nausea/Vomiting, Dyspepsia and Edema
+respectively. According to clinical judgment we we will assume that the
+clinical weights are (59.2,11.8, 8.9,17.8,1.8,0.5). This means that, to
+take the first two effects for example, a full swing from the least
+desirable observation to the most desirable one is judged to be
+\(\frac{59.2}{11.8}\) more important for the first effect than for the
+second. The following two functions allow us to calculate the preference
+scores for a vector of measurements for these 6 effects. Note that for
+the binary data we consider the underlying probability of observing the
+effect.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{k}{def} \PY{n+nf}{pref\PYZus{}score}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{m1}\PY{p}{,} \PY{n}{m2}\PY{p}{,} \PY{n}{sign}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    map from the effect range [m1, m2] to}
+         \PY{l+s+sd}{    the score range [0, 100]. Sign = 1}
+         \PY{l+s+sd}{    indicates higher effect meaasurements are more}
+         \PY{l+s+sd}{    desirable, otherwise the opposite.}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{m} \PY{o}{=} \PY{l+m+mf}{100.}\PY{o}{/}\PY{n+nb}{float}\PY{p}{(}\PY{p}{(}\PY{n}{m2} \PY{o}{\PYZhy{}} \PY{n}{m1}\PY{p}{)}\PY{p}{)}
+             \PY{n}{b} \PY{o}{=} \PY{n}{m} \PY{o}{*} \PY{n}{m1}
+             \PY{k}{if} \PY{n}{sign} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:}
+                 \PY{k}{return} \PY{o}{\PYZhy{}}\PY{n}{m} \PY{o}{*} \PY{n}{m1} \PY{o}{+} \PY{n}{m}\PY{o}{*}\PY{n}{x}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{k}{return} \PY{n}{m} \PY{o}{*} \PY{n}{m2} \PY{o}{\PYZhy{}} \PY{n}{m}\PY{o}{*}\PY{n}{x}
+         
+         
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}scores\PYZus{}perrow}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Return the preference score for a row of measurements}
+         \PY{l+s+sd}{    for only 4 binary and 2 cont}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{res} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}
+         
+             \PY{n}{res}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{pref\PYZus{}score}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{6.}\PY{p}{,} \PY{l+m+mf}{3.}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{res}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{pref\PYZus{}score}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{15.}\PY{p}{,} \PY{l+m+mf}{7.5}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{res}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{n}{pref\PYZus{}score}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{l+m+mf}{0.1}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{35}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{res}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]} \PY{o}{=} \PY{n}{pref\PYZus{}score}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} \PY{l+m+mf}{0.1}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{25}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{res}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]} \PY{o}{=} \PY{n}{pref\PYZus{}score}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{,} \PY{l+m+mf}{0.1}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{2}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{res}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]} \PY{o}{=} \PY{n}{pref\PYZus{}score}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{15}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{k}{return} \PY{n}{res}
+\end{Verbatim}
+
+
+    For example, the measurement vector (-1.1,-2, .3,0.17, .1, .14) gets a
+preference score of (45.6, 42.2, 20, 53.3, 100, 6.7). The best possible
+measurement would correspond necessarily to a preference score of
+(100,100,100,100,100), while the worst measurement would correspond to
+(0,0,0,0,0).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{1.1}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mf}{0.17}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{1}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{14}\PY{p}{]}
+         \PY{n}{get\PYZus{}scores\PYZus{}perrow}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} array([ 45.55555556,  42.22222222,  20.        ,  53.33333333,
+                100.        ,   6.66666667])
+\end{Verbatim}
+            
+    The final preference score, for this measurement, is the sum of the
+preference scores weighted by the clinicians weights, which gives us a
+final score of 4505.778, as follows:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{k}{def} \PY{n+nf}{get\PYZus{}final\PYZus{}score\PYZus{}perrow}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{weights}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    dot product of measurments and clinical}
+         \PY{l+s+sd}{    weights.}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{scores} \PY{o}{=} \PY{n}{get\PYZus{}scores\PYZus{}perrow}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+             \PY{k}{if} \PY{n}{weights} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{:}
+                 \PY{n}{weights} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{59.2}\PY{p}{,} \PY{l+m+mf}{11.8} \PY{p}{,} \PY{l+m+mf}{8.9}\PY{p}{,} \PY{l+m+mf}{17.8}\PY{p}{,} \PY{l+m+mf}{1.8}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{]}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{weights} \PY{o}{=} \PY{n}{weights}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+             \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{scores}\PY{p}{,} \PY{n}{weights}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{get\PYZus{}final\PYZus{}score\PYZus{}perrow}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} 4505.777777777777
+\end{Verbatim}
+            
+    We are interested in the posterior distribution of the final score for a
+new subject in each of the groups. This way we can calculate the
+posterior distribution of the difference between the two groups. We do
+that by sampling one latent variable vector \(Z\) for each posterior
+sample of \(\mu, R, \sigma\). For each \(Z\) we calculate a final score,
+which becomes a posterior sample for the final score.
+
+The function to calculate the posterior samples for the two groups is
+the following:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{k}{def} \PY{n+nf}{final\PYZus{}score}\PY{p}{(}\PY{n}{post\PYZus{}samples}\PY{p}{,} \PY{n}{Kc}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{Kb}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{weights}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    get final score for posterior samples}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{K} \PY{o}{=} \PY{n}{Kb} \PY{o}{+} \PY{n}{Kc}
+             \PY{n}{N\PYZus{}iter} \PY{o}{=} \PY{n}{post\PYZus{}samples}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             
+             \PY{n}{mus} \PY{o}{=} \PY{n}{post\PYZus{}samples}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+             \PY{n}{sigmas} \PY{o}{=} \PY{n}{post\PYZus{}samples}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sigma}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+             \PY{n}{Rs} \PY{o}{=} \PY{n}{post\PYZus{}samples}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{R}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+             
+             \PY{k}{if} \PY{n}{weights} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{:}
+                 \PY{n}{ws} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{59.2}\PY{p}{,} \PY{l+m+mf}{11.88}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{9}\PY{p}{,} \PY{l+m+mf}{17.8}\PY{p}{,} \PY{l+m+mf}{1.8}\PY{p}{,} \PY{l+m+mf}{0.6}\PY{p}{]}\PY{p}{)}
+         
+             \PY{n}{final\PYZus{}score} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{n}{N\PYZus{}iter}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N\PYZus{}iter}\PY{p}{)}\PY{p}{:}
+                 
+                 \PY{n}{D} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{diag}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{(}\PY{n}{sigmas}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n}{Kb}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}  
+                 \PY{n}{Sigma} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{diag}\PY{p}{(}\PY{n}{D}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{R}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{D}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{z} \PY{o}{=} \PY{n}{multivariate\PYZus{}normal}\PY{o}{.}\PY{n}{rvs}\PY{p}{(}\PY{n}{mean}\PY{o}{=}\PY{n}{mus}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{cov}\PY{o}{=}\PY{n}{Sigma}\PY{p}{)}
+                 \PY{n}{final\PYZus{}score}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{get\PYZus{}final\PYZus{}score\PYZus{}perrow}\PY{p}{(}\PY{n}{z}\PY{p}{,} \PY{n}{ws}\PY{p}{)}
+             \PY{k}{return} \PY{n}{final\PYZus{}score}
+\end{Verbatim}
+
+
+    We can draw posterior samples from fitting our model to the treatment
+group data as follows
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{data\PYZus{}list} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{n}{N}\PY{o}{=}\PY{n}{N\PYZus{}treat}\PY{p}{,} \PY{n}{Kb}\PY{o}{=}\PY{n}{Kb}\PY{p}{,} \PY{n}{Kc}\PY{o}{=}\PY{n}{Kc}\PY{p}{,} \PY{n}{K}\PY{o}{=}\PY{n}{Kb}\PY{o}{+}\PY{n}{Kc}\PY{p}{,} \PY{n}{yb}\PY{o}{=}\PY{n}{y\PYZus{}control}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{Kc}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}\PY{p}{,} \PY{n}{yc}\PY{o}{=}\PY{n}{y\PYZus{}treat}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{n}{Kc}\PY{p}{]}\PY{p}{)}
+         \PY{n}{pickle}\PY{o}{.}\PY{n}{dump}\PY{p}{(}\PY{n}{data\PYZus{}list}\PY{p}{,} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data\PYZus{}treat.pkl}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wb}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{fit} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{sampling}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{data\PYZus{}list}\PY{p}{,} \PY{n+nb}{iter}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{chains}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+         \PY{n}{post\PYZus{}samples} \PY{o}{=} \PY{n}{fit}\PY{o}{.}\PY{n}{extract}\PY{p}{(}\PY{n}{permuted}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}  \PY{c+c1}{\PYZsh{} return a dictionary of arrays}
+         \PY{n}{pickle}\PY{o}{.}\PY{n}{dump}\PY{p}{(}\PY{n}{post\PYZus{}samples}\PY{p}{,} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{fit\PYZus{}treat.pkl}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wb}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}  \PY{c+c1}{\PYZsh{} save samples for later use}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/home/marianne/miniconda3/envs/pystan/lib/python3.6/site-packages/pystan/misc.py:399: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  elif np.issubdtype(np.asarray(v).dtype, float):
+
+    \end{Verbatim}
+
+    We can evaluate the above function for each group separately. The value
+we are interested in is the difference of the final score between the
+treatment and the control group. We have pre-fit our models to the two
+groups and saved the posterior samples. We load the samples and compute
+the values of interest as follows:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{scores} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{control}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{final\PYZus{}score}\PY{p}{(}\PY{n}{pickle}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{fit\PYZus{}control.pkl}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rb}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+                               \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{treat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{final\PYZus{}score}\PY{p}{(}\PY{n}{pickle}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{fit\PYZus{}treat.pkl}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rb}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{scores}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_39_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We observe that under this model, the final score is above 0 with
+probability 40\% for a new patient. We can also make a plot of the
+difference to visualize the final result.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{scores}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{diff}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{scores}\PY{o}{.}\PY{n}{treat} \PY{o}{\PYZhy{}} \PY{n}{scores}\PY{o}{.}\PY{n}{control}
+         \PY{n+nb}{float}\PY{p}{(}\PY{p}{(}\PY{n}{scores}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{diff}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{scores}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:} 0.4415
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{scores}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{diff}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{score(Treatment) \PYZhy{} score(Control)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                \PY{n}{alpha} \PY{o}{=} \PY{o}{.}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salmon}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                \PY{n}{legend}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_42_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{discussion-future-work}{%
+\subsubsection{Discussion, Future Work}\label{discussion-future-work}}
+
+One natural question is how sensitive the final result is to the choice
+of preference score functions. The preference scores could in principle
+have any form. In this study we chose linear mappings because they are
+easy to interpret and to work with. Phillips et al. (2015) looked at
+non-linear preference functions, guided by clinical experts who
+suggested that ``desirability'' of some effects is better modeled with
+sigmoid-like functions. Their study found ``that model results are very
+robust to imprecision and disagreements about weights. Even non-linear
+value functions on the most discriminating effects did not tip this
+balance {[}sign of score difference between treatment and control{]}''.
+
+Another source of variability we examined is the choice of clinical
+weights. Based on preliminary experimentation we conclude that the final
+probability seems relatively stable to changes in the weights. When we
+perturbed the weights by 10\%, we observed a difference in the final
+score distribution that was close to 5\%.
+
+\textbf{Acknowledgments}\\
+The author would like to thank Jonah Gabry, Bob Carpenter, Andrew
+Gelman, and Ben Goodrich (who practically wrote the Stan code) for their
+feedback and help during the process of writing this report.
+
+\textbf{License}
+
+\begin{itemize}
+\tightlist
+\item
+  Code \copyright~2017, Konstantinos Vamvourellis, licensed under BSD-3\\
+\item
+  Text \copyright~2017, Konstantinos Vamvourellis, licensed under CC BY-NC 4.0
+\end{itemize}
+
+    \hypertarget{references}{%
+\section{References}\label{references}}
+
+\begin{itemize}
+\item
+  Chib, S., and E. Greenberg. 1998. ``Analysis of Multivariate Probit
+  Models.'' Biometrika 85 (2).
+\item
+  Nissen, S. E., and K. Wolski. 2007. ``Effect of Rosiglitazone on the
+  Risk of Myocardial Infarction and Death from Cardiovascular Causes.''
+  New England Journal of Medicine 356: 2457--71.
+\item
+  Phillips, Lawrence, Billy Amzal, Alex Asiimwe, Edmond Chan, Chen Chen,
+  Diana Hughes, Juhaeri Juhaeri, et al.~2015. ``Wave 2 Case Study
+  Report: Rosiglitazone.''
+\item
+  Phillips, Lawrence, and others. 2013. ``IMI Work Package 5: Report
+  2:b:ii Benefit - Risk Wave 2 Case Study Report: Rosiglitazone.''
+\item
+  Talhouk, A., A. Doucet, and K. Murphy. 2012. ``Efficient Bayesian
+  Inference for Multivariate Probit Models with Sparse Inverse
+  Correlation Matrices.'' Journal of Computational and Graphical
+  Statistics 21 (3).
+\end{itemize}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
