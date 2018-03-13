@@ -1,1 +1,1 @@
-# case_studies_Py
+# Collection of case studies using Pystan
