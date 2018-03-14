@@ -15,3 +15,4 @@ Remove:
 
     $ conda remove -n rosi_py --all
 
+If you are running GNU/Linux, please see [spec-file.txt](./spec-file.txt).
