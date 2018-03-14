@@ -15,4 +15,26 @@ Remove:
 
     $ conda remove -n rosi_py --all
 
-If you are running GNU/Linux, please see [spec-file.txt](./spec-file.txt).
+## Exports
+
+Export Jupyter notebook to LaTeX format:
+
+    $ jupyter nbconvert --to latex rosi_py.ipynb
+
+Apply the following patch:
+
+    --- rosi_py.tex
+    +++ rosi_py.tex
+    @@ -141,8 +141,9 @@
+         \def\gt{>}
+         \def\lt{<}
+         % Document parameters
+    -    \title{rosi\_py}
+    -    
+    +    \title{Assessing the Safety of Rosiglitazone\\
+    +    for the Treatment of Type 2 Diabetes}
+    +    \author{Konstantinos Vamvourellis}
+
+Generate PDF export:
+
+    $ pdflatex rosi_py.tex
