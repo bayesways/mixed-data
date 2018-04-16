@@ -23,4 +23,5 @@ install:
 script:
   # Your test script goes here
   - jupyter nbconvert --to latex rosi_py.ipynb
+  - pdflatex rosi_py.tex
   - source deactivate
