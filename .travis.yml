@@ -20,7 +20,11 @@ install:
   - conda env create -n test-environment -f environment.yml
   - source activate test-environment
 
+  # Install TeXLive to be able to run pdflatex
+  - sudo apt-get install texlive-full
+
 script:
   # Your test script goes here
   - jupyter nbconvert --to latex rosi_py.ipynb
+  - pdflatex rosi_py.tex
   - source deactivate
