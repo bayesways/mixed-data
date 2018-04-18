@@ -1,3 +1,5 @@
+
+
 #pickled files
 *.pkl
 
@@ -74,7 +76,11 @@ docs/_build/
 target/
 
 # Jupyter Notebook
-.ipynb_checkpoints
+**/*.ipynb_checkpoints/
+
+# LaTeX
+**/*.aux
+**/*.out
 
 # pyenv
 .python-version
