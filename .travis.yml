@@ -28,3 +28,11 @@ script:
   - jupyter nbconvert --to latex rosi_py.ipynb
   - pdflatex rosi_py.tex
   - source deactivate
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_API_KEY  # Set in travis-ci.org dashboard.
+  keep-history: true
+  on:
+    branch: master
