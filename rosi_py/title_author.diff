@@ -1,0 +1,14 @@
+--- rosi_py.tex	2018-04-18 14:14:39.439388576 -0400
++++ rosi_py.tex	2018-04-18 14:15:29.883386466 -0400
+@@ -141,8 +141,9 @@
+     \def\gt{>}
+     \def\lt{<}
+     % Document parameters
+-    \title{rosi\_py}
+-    
++    \title{Assessing the Safety of Rosiglitazone\\
++    for the Treatment of Type 2 Diabetes}
++    \author{Konstantinos Vamvourellis}
+     
+     
+ 
