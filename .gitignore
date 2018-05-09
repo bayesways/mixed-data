@@ -1,5 +1,8 @@
-#pickled files
-*.pkl
+# Pickled files
+**/*.pkl
+
+# Figure files
+**/*.png
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
