@@ -19,6 +19,7 @@ Remove:
 
 Export Jupyter notebook to LaTeX format:
 
+    $ cd notebooks/
     $ jupyter nbconvert --to latex rosi_py.ipynb
 
 Apply the following patch:
