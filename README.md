@@ -39,3 +39,9 @@ Apply the following patch:
 Generate PDF export:
 
     $ pdflatex rosi_py.tex
+
+
+## ToDo
+
+* add comparison to treatment group?
+* add conclusion
