@@ -43,5 +43,6 @@ Generate PDF export:
 
 ## ToDo
 
-* add comparison to treatment group?
-* add conclusion
+* ~~add comparison to treatment group?~~
+* ~~add conclusion~~
+* final proof read
