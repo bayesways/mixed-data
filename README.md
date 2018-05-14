@@ -1,11 +1,11 @@
-# Assesssing the Safety of a Drug
+# A Latent Variable Model for Mixed Data
 
 ## Setup
 
 Initial install:
 
     $ conda env create -f environment.yml
-    $ source activate rosi_py
+    $ source activate mixed-data
 
 Update:
 
@@ -13,7 +13,7 @@ Update:
 
 Remove:
 
-    $ conda remove -n rosi_py --all
+    $ conda remove -n mixed-data --all
 
 ## Exports
 
